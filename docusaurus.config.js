@@ -60,11 +60,6 @@ const config = {
             label: 'Guides',
           },
           {
-            to: 'api',
-            label: 'API',
-            position: 'left',
-          },
-          {
             href: 'https://github.com/web3-storage/web3.storage',
             label: 'GitHub',
             position: 'right',
