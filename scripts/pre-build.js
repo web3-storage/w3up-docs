@@ -139,7 +139,7 @@ async function main() {
     }
 
     // remove any existing clone and re-clone the repo, then generate the docs and copy into the site
-    await fs.promises.rm(dir, { recursive: true })
+    await fs.promises.rm(dir, { recursive: true, force: true })
     await cloneRepo(repo, dir)
     await generateDocs(repo, dir)
     await copyDocsToSiteDestination(repo, dir)
