@@ -8,7 +8,6 @@ const fs = require('node:fs')
 const { promisify } = require('node:util')
 const exec = promisify(require('node:child_process').exec)
 const { mkdirp } = require('mkdirp')
-const rimraf = require('rimraf')
 const copy = require('recursive-copy')
 const git = require('isomorphic-git')
 const http = require('isomorphic-git/http/node')
@@ -140,7 +139,7 @@ async function main() {
     }
 
     // remove any existing clone and re-clone the repo, then generate the docs and copy into the site
-    await rimraf(dir)
+    await fs.promises.rm(dir, { recursive: true })
     await cloneRepo(repo, dir)
     await generateDocs(repo, dir)
     await copyDocsToSiteDestination(repo, dir)
