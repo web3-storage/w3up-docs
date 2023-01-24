@@ -8,7 +8,7 @@ You can easily integrate web3.storage into your JavaScript apps using `w3up-clie
 In this guide, we'll walk through the following steps:
 
 1. [Installing the client library](#install)
-2. [Createing and registering your first space](#create-and-register-a-space)
+2. [Creating and registering your first space](#create-and-register-a-space)
 3. [Uploading a file or directory](#upload-files)
 4. [Viewing your file with IPFS](#view-your-file-on-an-ipfs-gateway)
 
