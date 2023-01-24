@@ -37,7 +37,7 @@ import { create } from '@web3-storage/w3up-client';
 const client = await create();
 ```
 
-See the [client reference docs][reference-w3up-client#constructor] for more creation options.
+See the [client reference docs][reference-w3up-client#create] for more creation options.
 
 ## Create and register a space
 
@@ -118,7 +118,7 @@ Opening the gateway URL in a browser will take you to your uploaded file, or a d
 Of course, gateways aren't the only option for fetching data from IPFS! If you're running a [kubo](https://github.com/ipfs/kubo) node, you can use [`ipfs get <your-cid>`](https://docs.ipfs.tech/reference/kubo/cli/#ipfs-get) to fetch your content from the peer-to-peer IPFS Bitswap network.
 
 
-[reference-w3up-client#constructor]: ../api/w3up-client/classes/client.Client.md#constructor
+[reference-w3up-client#create]: ../api/w3up-client/modules/package.md#create
 [reference-w3up-client#createspace]: ../api/w3up-client/classes/client.Client.md#createspace
 [reference-w3up-client#setcurrentspace]: ../api/w3up-client/classes/client.Client.md#setcurrentspace
 [reference-w3up-client#registerspace]: ../api/w3up-client/classes/client.Client.md#registerspace
