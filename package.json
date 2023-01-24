@@ -6,7 +6,7 @@
     "docusaurus": "docusaurus",
     "start": "docusaurus start",
     "build": "docusaurus build",
-    "prebuild": "node ./scripts/pre-build.js",
+    "prebuild": "node ./scripts/pre-build.js --clean",
     "prestart": "node ./scripts/pre-build.js",
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",
