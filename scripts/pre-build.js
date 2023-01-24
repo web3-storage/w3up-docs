@@ -13,15 +13,16 @@ const copy = require('recursive-copy')
 const git = require('isomorphic-git')
 const http = require('isomorphic-git/http/node')
 
-const REPO_ROOT = path.resolve(__dirname, '..')
-const WORKDIR = path.join(REPO_ROOT, '.prebuild')
+const DOCS_REPO_ROOT = path.resolve(__dirname, '..')
+const WORKDIR = path.join(DOCS_REPO_ROOT, '.prebuild')
 
 /** 
  * @typedef {object} RepoInfo
- * @property {string} url
- * @property {string} ref
- * @property {string[]} buildCommands
- * @property {string} docsOutput
+ * @property {string} url repo url to clone
+ * @property {string} ref branch / tag to checkout
+ * @property {string[]} buildCommands list of shell commands to run to install deps & build markdown docs
+ * @property {string} docsOutput path relative to cloned repo containing markdown output
+ * @property {string} siteDestination path relative to _this_ repo where we should put the generated docs
  * 
  * @type {Record<string, RepoInfo>}
  */
@@ -31,13 +32,15 @@ const REPOS = {
     ref: 'main',
     buildCommands: ['pnpm install', 'pnpm run docs:markdown'],
     docsOutput: 'docs/markdown',
-    siteDestination: 'docs/api/w3protocol'
+    siteDestination: 'docs/api/w3protocol',
   },
-  // TODO: enable once w3up-client has a docs:generate command
-  // 'w3up-client': {
-  //   url: 'https://github.com/web3-storage/w3up-client',
-  //   ref: 'main',
-  // }
+  'w3up-client': {
+    url: 'https://github.com/web3-storage/w3up-client',
+    ref: 'docs/generate-docusaurus-markdown',
+    buildCommands: ['npm install', 'npm run docs:markdown'],
+    docsOutput: 'docs/markdown',
+    siteDestination: 'docs/api/w3up-client',
+  }
 }
 
 /**
@@ -76,19 +79,40 @@ async function generateDocs(repo, checkoutDir) {
   }
 }
 
+async function copyDocsToSiteDestination(repo, checkoutDir) {
+  const src = path.join(checkoutDir, repo.docsOutput)
+  const dest = path.join(DOCS_REPO_ROOT, repo.siteDestination)
+
+  // TODO: add hook to massage the final output, e.g. replace readme with one that
+  // makes more sense for the docs site.
+
+  await rimraf(dest)
+  await copy(src, dest)
+}
+
 async function main() {
-  await mkdirp(WORKDIR)  
+  const clean = process.argv.some(arg => arg === '--clean')
+
+  await mkdirp(WORKDIR)
   for (const [name, repo] of Object.entries(REPOS)) {
     const dir = path.join(WORKDIR, name)
+    const mdSrc = path.join(dir, repo.docsOutput)
+
+    // If the generated docs already exist and the --clean flag is not present,
+    // just copy them over and move on instead of re-cloning and rebuilding.
+    // This makes local development of the docs repo with `npm run start`
+    // much nicer. Production builds run with --clean and always rebuild.
+    if (fs.existsSync(mdSrc) && !clean) {
+      console.warn(`using existing generated docs at ${mdSrc}. Run this script with --clean to force rebuild.`)
+      await copyDocsToSiteDestination(repo, dir)
+      continue
+    }
+
+    // remove any existing clone and re-clone the repo, then generate the docs and copy into the site
     await rimraf(dir)
     await cloneRepo(repo, dir)
     await generateDocs(repo, dir)
-  
-    // copy generated docs into site source tree
-    const src = path.join(dir, repo.docsOutput)
-    const dest = path.join(REPO_ROOT, repo.siteDestination)
-    await rimraf(dest)
-    await copy(src, dest)
+    await copyDocsToSiteDestination(repo, dir)
   }
 }
 
