@@ -12,35 +12,57 @@ const rimraf = require('rimraf')
 const copy = require('recursive-copy')
 const git = require('isomorphic-git')
 const http = require('isomorphic-git/http/node')
+const yaml = require('yaml')
 
 const DOCS_REPO_ROOT = path.resolve(__dirname, '..')
 const WORKDIR = path.join(DOCS_REPO_ROOT, '.prebuild')
 
 /** 
+ * @typedef {object} Postprocessing
+ * @property {string} [renameIndexModule] if present, rename modules/index.md to the field value, to avoid docusaurus treating it as a directory index page
+ * @property {string} [replaceReadme] if present, replace the default index.md (based on repo README) with a file at the given path (relative to this repo's root)
+ * @property {object} [categoryYaml] if present, contents will be stringified as yaml and replace the _category_.yml file in the output
+ * 
  * @typedef {object} RepoInfo
  * @property {string} url repo url to clone
  * @property {string} ref branch / tag to checkout
  * @property {string[]} buildCommands list of shell commands to run to install deps & build markdown docs
  * @property {string} docsOutput path relative to cloned repo containing markdown output
  * @property {string} siteDestination path relative to _this_ repo where we should put the generated docs
+ * @property {Postprocessing} [postprocess] optional post-processing to apply to generated docs
  * 
  * @type {Record<string, RepoInfo>}
  */
 const REPOS = {
+    'w3up-client': {
+    url: 'https://github.com/web3-storage/w3up-client',
+    ref: 'docs/generate-docusaurus-markdown',
+    buildCommands: ['npm install', 'npm run docs:markdown'],
+    docsOutput: 'docs/markdown',
+    siteDestination: 'docs/api/w3up-client',
+    postprocess: {
+      renameIndexModule: 'package.md',
+      replaceReadme: 'scripts/api-doc-overrides/w3up-client.md',
+      categoryYaml: {
+        label: 'JS Client: w3up-client',
+        position: 1,
+      }
+    }
+  },
   w3protocol: {
     url: 'https://github.com/web3-storage/w3protocol',
     ref: 'main',
     buildCommands: ['pnpm install', 'pnpm run docs:markdown'],
     docsOutput: 'docs/markdown',
     siteDestination: 'docs/api/w3protocol',
+    postprocess: {
+      categoryYaml: {
+        label: "UCAN Protocol: w3protocol",
+        position: 2,
+      }
+    }
   },
-  'w3up-client': {
-    url: 'https://github.com/web3-storage/w3up-client',
-    ref: 'docs/generate-docusaurus-markdown',
-    buildCommands: ['npm install', 'npm run docs:markdown'],
-    docsOutput: 'docs/markdown',
-    siteDestination: 'docs/api/w3up-client',
-  }
+
 }
 
 /**
@@ -77,14 +99,44 @@ async function generateDocs(repo, checkoutDir) {
       process.chdir(pwd)
     }
   }
+
+  await postprocessDocsOutput(repo, checkoutDir)
+}
+
+async function postprocessDocsOutput(repo, checkoutDir) {
+  if (!repo.postprocess) {
+    return
+  }
+  const { replaceReadme, renameIndexModule, categoryYaml } = repo.postprocess
+  if (replaceReadme) {
+    const src = path.join(DOCS_REPO_ROOT, replaceReadme)
+    if (!fs.existsSync(src)) {
+      console.error('docs postprocessing config points to non-existant replacement readme at', replaceReadme)
+      process.exit(1)
+    }
+
+    console.log(`Replacing default index.md with ${src}`)
+    const dest = path.join(checkoutDir, repo.docsOutput, 'index.md')
+    await copy(src, dest, { overwrite: true })
+  }
+
+  if (renameIndexModule) {
+    const src = path.join(checkoutDir, repo.docsOutput, 'modules', 'index.md')
+    const dest = path.join(checkoutDir, repo.docsOutput, 'modules', renameIndexModule)
+    console.log(`renaming ${src} to ${dest}`)
+    await fs.promises.rename(src, dest)
+  }
+
+  if (categoryYaml) {
+    const content = yaml.stringify(categoryYaml)
+    const dest = path.join(checkoutDir, repo.docsOutput, '_category_.yml')
+    await fs.promises.writeFile(dest, content, { encoding: 'utf-8' })
+  }
 }
 
 async function copyDocsToSiteDestination(repo, checkoutDir) {
   const src = path.join(checkoutDir, repo.docsOutput)
   const dest = path.join(DOCS_REPO_ROOT, repo.siteDestination)
-
-  // TODO: add hook to massage the final output, e.g. replace readme with one that
-  // makes more sense for the docs site.
 
   await rimraf(dest)
   await copy(src, dest)
