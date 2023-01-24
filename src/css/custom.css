@@ -26,19 +26,8 @@
     background-color: hsla(0, 0%, 14%, 0.466);
 }
 
-.docs-wrapper main a {
-  font-weight: 600;
-  border-bottom: 0.125rem solid rgba(#cebcf4, 0);
-  padding-bottom: 0.1875rem;
-  transition: all 0.25s ease;
-}
 .docs-wrapper main a:hover {
   color: #d726d7;
-}
-.docs-wrapper main a h1 a, .docs-wrapper main h2 a, .docs-wrapper main h3 a, .docs-wrapper main h4 a, .docs-wrapper main h5 a {
-  color: #03040a;
-  border-bottom: none;
-  padding-bottom: 0;
 }
         
 /* You can override the default Infima variables here. */
