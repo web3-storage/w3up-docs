@@ -12,7 +12,6 @@ const rimraf = require('rimraf')
 const copy = require('recursive-copy')
 const git = require('isomorphic-git')
 const http = require('isomorphic-git/http/node')
-const yaml = require('yaml')
 
 const DOCS_REPO_ROOT = path.resolve(__dirname, '..')
 const WORKDIR = path.join(DOCS_REPO_ROOT, '.prebuild')
@@ -20,8 +19,6 @@ const WORKDIR = path.join(DOCS_REPO_ROOT, '.prebuild')
 /** 
  * @typedef {object} Postprocessing
  * @property {string} [renameIndexModule] if present, rename modules/index.md to the field value, to avoid docusaurus treating it as a directory index page
- * @property {string} [replaceReadme] if present, replace the default index.md (based on repo README) with a file at the given path (relative to this repo's root)
- * @property {object} [categoryYaml] if present, contents will be stringified as yaml and replace the _category_.yml file in the output
  * 
  * @typedef {object} RepoInfo
  * @property {string} url repo url to clone
@@ -42,11 +39,6 @@ const REPOS = {
     siteDestination: 'docs/api/w3up-client',
     postprocess: {
       renameIndexModule: 'package.md',
-      replaceReadme: 'scripts/api-doc-overrides/w3up-client.md',
-      categoryYaml: {
-        label: 'JS Client: w3up-client',
-        position: 1,
-      }
     }
   },
   w3protocol: {
@@ -55,15 +47,11 @@ const REPOS = {
     buildCommands: ['pnpm install', 'pnpm run docs:markdown'],
     docsOutput: 'docs/markdown',
     siteDestination: 'docs/api/w3protocol',
-    postprocess: {
-      categoryYaml: {
-        label: "UCAN Protocol: w3protocol",
-        position: 2,
-      }
-    }
   },
-
 }
+
+// don't overwrite these files if they exist in the destination.
+const NO_OVERWRITE = ['index.md', '_category_.yml']
 
 /**
  * @param {RepoInfo} repo 
@@ -107,18 +95,7 @@ async function postprocessDocsOutput(repo, checkoutDir) {
   if (!repo.postprocess) {
     return
   }
-  const { replaceReadme, renameIndexModule, categoryYaml } = repo.postprocess
-  if (replaceReadme) {
-    const src = path.join(DOCS_REPO_ROOT, replaceReadme)
-    if (!fs.existsSync(src)) {
-      console.error('docs postprocessing config points to non-existant replacement readme at', replaceReadme)
-      process.exit(1)
-    }
-
-    console.log(`Replacing default index.md with ${src}`)
-    const dest = path.join(checkoutDir, repo.docsOutput, 'index.md')
-    await copy(src, dest, { overwrite: true })
-  }
+  const { renameIndexModule } = repo.postprocess
 
   if (renameIndexModule) {
     const src = path.join(checkoutDir, repo.docsOutput, 'modules', 'index.md')
@@ -126,20 +103,22 @@ async function postprocessDocsOutput(repo, checkoutDir) {
     console.log(`renaming ${src} to ${dest}`)
     await fs.promises.rename(src, dest)
   }
-
-  if (categoryYaml) {
-    const content = yaml.stringify(categoryYaml)
-    const dest = path.join(checkoutDir, repo.docsOutput, '_category_.yml')
-    await fs.promises.writeFile(dest, content, { encoding: 'utf-8' })
-  }
 }
 
 async function copyDocsToSiteDestination(repo, checkoutDir) {
   const src = path.join(checkoutDir, repo.docsOutput)
   const dest = path.join(DOCS_REPO_ROOT, repo.siteDestination)
 
-  await rimraf(dest)
-  await copy(src, dest)
+  await copy(src, dest, {
+    overwrite: true,
+    filter: (filePath) => {
+      const destPath = path.join(dest, filePath)
+      if (NO_OVERWRITE.includes(filePath) && fs.existsSync(destPath)) {
+        return false
+      }
+      return true
+    }
+  })
 }
 
 async function main() {
