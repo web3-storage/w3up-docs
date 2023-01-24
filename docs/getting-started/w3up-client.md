@@ -7,10 +7,12 @@ You can easily integrate web3.storage into your JavaScript apps using `w3up-clie
 
 In this guide, we'll walk through the following steps:
 
-1. [Install the client library](#install)
-2. [Create and register your first space](#create-space)
-3. [Upload a file or directory](#upload)
-4. [View your file with IPFS](#view)
+1. [Installing the client library](#install)
+2. [Createing and registering your first space](#create-and-register-a-space)
+3. [Uploading a file or directory](#upload-files)
+4. [Viewing your file with IPFS](#view-your-file-on-an-ipfs-gateway)
+
+## Install
 
 :::info
 You'll need [Node](https://nodejs.com) version 16 or higher, with NPM version 7 or higher to complete this guide.
@@ -20,9 +22,6 @@ You can check your local versions like this:
 node --version && npm --version
 ```
 :::
-
-
-## <a name="install" /> Installation
 
 Add the library to your project's dependencies:
 
@@ -40,7 +39,7 @@ const client = await create();
 
 See the [client reference docs][reference-w3up-client#constructor] for more creation options.
 
-## <a name="create-space" /> Create and register a space
+## Create and register a space
 
 When you upload things to web3.storage, each upload is associated with a "space," which is a unique identifier that acts as a namespace for your content.
 
@@ -75,7 +74,8 @@ try {
 Calling `registerSpace` will cause an email to be sent to the given address. Once a user clicks the confirmation link in the email, the `registerSpace` method will resolve. Make sure to check for errors, as `registerSpace` will fail if the email is not confirmed within the expiration timeout.
 
 Now that you've registered a space, you're ready to upload files!
-## <a name="upload" /> Upload a file or directory
+
+## Upload files
 
 Now that you've [created and registered a space](#create-space), you're ready to upload files to web3.storage!
 
@@ -107,7 +107,7 @@ In the example above, `directoryCid` resolves to an IPFS directory with the foll
 └── src
     └── main.py
 ```
-## <a name="view" /> View your file on an IPFS gateway
+## View your file on an IPFS gateway
 
 The `uploadFile` and `uploadDirectory` methods described in the previous step both return a CID, or Content Identifier, encoded as a string.
 

@@ -1,19 +1,11 @@
 ---
 slug: '/'
+title: 'Introduction'
 sidebar_position: 1
 ---
 
-# Introduction
+# Better storage.<br/>Better transfers.<br/>Better internet.
 
-Let's discover **web3.storage in less than 5 minutes**.
+> When you need file storage for your project, website, or application, web3.storage is here for you. All it takes to [get started](./getting-started/) storing on the decentralized web is a free account — no need to wrestle with complicated details.
 
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Donec pretium vulputate sapien nec. Tristique risus nec feugiat in fermentum posuere. Eget lorem dolor sed viverra ipsum nunc aliquet. Leo urna molestie at elementum eu. Et pharetra pharetra massa massa ultricies mi quis hendrerit dolor. Sed arcu non odio euismod lacinia. Posuere urna nec tincidunt praesent semper. Adipiscing diam donec adipiscing tristique risus nec feugiat in fermentum. Purus viverra accumsan in nisl nisi. Fermentum leo vel orci porta non pulvinar neque laoreet. Risus in hendrerit gravida rutrum quisque non. Habitasse platea dictumst quisque sagittis purus sit. Cursus mattis molestie a iaculis at erat pellentesque adipiscing. Eget nulla facilisi etiam dignissim diam quis. Commodo sed egestas egestas fringilla phasellus faucibus scelerisque eleifend donec. Sagittis orci a scelerisque purus. Nunc sed id semper risus in hendrerit gravida rutrum. Habitant morbi tristique senectus et.
-
-Tristique senectus et netus et malesuada fames ac. Ut aliquam purus sit amet luctus venenatis. Enim tortor at auctor urna nunc id cursus. Massa enim nec dui nunc mattis enim. Porttitor eget dolor morbi non arcu. Donec ac odio tempor orci dapibus ultrices in. Faucibus in ornare quam viverra orci. Posuere lorem ipsum dolor sit amet consectetur adipiscing. Sapien eget mi proin sed libero. Morbi quis commodo odio aenean sed adipiscing diam donec. Nulla pharetra diam sit amet.
-
-Tempor orci dapibus ultrices in iaculis nunc sed. Velit dignissim sodales ut eu sem integer vitae justo. Nulla facilisi nullam vehicula ipsum a arcu cursus vitae congue. Lacus viverra vitae congue eu consequat ac. Fringilla ut morbi tincidunt augue interdum velit euismod. Purus ut faucibus pulvinar elementum integer enim neque volutpat ac. Molestie a iaculis at erat pellentesque adipiscing commodo elit. Posuere lorem ipsum dolor sit amet consectetur adipiscing. Eu ultrices vitae auctor eu. Magnis dis parturient montes nascetur ridiculus mus. Diam donec adipiscing tristique risus nec feugiat.
-
-Donec pretium vulputate sapien nec sagittis aliquam. At in tellus integer feugiat scelerisque varius. Sed adipiscing diam donec adipiscing tristique risus. Consequat interdum varius sit amet. Facilisis gravida neque convallis a cras. Risus pretium quam vulputate dignissim suspendisse in est ante in. Tristique senectus et netus et malesuada fames ac turpis egestas. Congue nisi vitae suscipit tellus mauris a diam. Integer vitae justo eget magna fermentum. Enim nulla aliquet porttitor lacus luctus. Donec et odio pellentesque diam volutpat commodo. Duis convallis convallis tellus id interdum velit laoreet id donec. Sollicitudin aliquam ultrices sagittis orci a scelerisque purus semper. Tempor orci eu lobortis elementum. Augue neque gravida in fermentum. In cursus turpis massa tincidunt dui ut ornare lectus sit. Pellentesque adipiscing commodo elit at imperdiet dui. Diam donec adipiscing tristique risus. Lectus sit amet est placerat.
-
-Arcu cursus vitae congue mauris rhoncus aenean. Morbi non arcu risus quis varius quam quisque. Eget magna fermentum iaculis eu non. Accumsan sit amet nulla facilisi morbi tempus iaculis urna. Integer enim neque volutpat ac tincidunt vitae semper. Neque ornare aenean euismod elementum. Cursus turpis massa tincidunt dui ut ornare. Risus viverra adipiscing at in tellus integer feugiat. Eu lobortis elementum nibh tellus molestie. Pharetra magna ac placerat vestibulum lectus mauris. Felis bibendum ut tristique et egestas quis ipsum suspendisse ultrices.
+With web3.storage, you get all the benefits of decentralized storage technologies with the frictionless experience you expect in a modern dev workflow. **All you need to use web3.storage is an account and your data.** Under the hood, web3.storage is backed by the provable storage of [Filecoin](https://filecoin.io) and makes data accessible to your users over the public [IPFS](https://ipfs.io) network — but when it comes down to building your next application, service, or website, all you need to know is that web3.storage makes building on decentralized technologies simple.
