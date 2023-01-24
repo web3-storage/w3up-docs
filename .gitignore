@@ -7,6 +7,11 @@
 # Generated files
 .docusaurus
 .cache-loader
+.prebuild
+
+# Generated API docs
+/docs/api/w3protocol
+/docs/api/w3up-client
 
 # Misc
 .DS_Store
