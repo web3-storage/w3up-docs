@@ -15,7 +15,9 @@
     "write-translations": "docusaurus write-translations",
     "write-heading-ids": "docusaurus write-heading-ids",
     "typecheck": "tsc",
-    "clean": "node ./scripts/clean.js"
+    "clean": "node ./scripts/clean.js",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
   },
   "dependencies": {
     "@docusaurus/core": "2.2.0",
@@ -29,9 +31,20 @@
   "devDependencies": {
     "@docusaurus/module-type-aliases": "2.2.0",
     "@tsconfig/docusaurus": "^1.0.5",
+    "@typescript-eslint/eslint-plugin": "^5.49.0",
+    "eslint": "^8.32.0",
+    "eslint-config-standard": "^17.0.0",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-mdx": "^2.0.5",
+    "eslint-plugin-n": "^15.6.1",
+    "eslint-plugin-promise": "^6.1.1",
     "isomorphic-git": "^1.21.0",
+    "lint-staged": "^13.1.0",
     "mkdirp": "^2.1.3",
-    "typescript": "^4.7.4"
+    "simple-git-hooks": "^2.8.1",
+    "standard": "^17.0.0",
+    "standard-markdown": "^7.1.0",
+    "typescript": "^4.9.4"
   },
   "browserslist": {
     "production": [
@@ -47,5 +60,11 @@
   },
   "engines": {
     "node": ">=16.14"
+  },
+  "simple-git-hooks": {
+    "pre-commit": "npx lint-staged"
+  },
+  "lint-staged": {
+    "*.md": "npm run lint"
   }
 }

@@ -6,12 +6,12 @@ You can get started using web3.storage right away from your command line using `
 
 In this guide, we'll walk through the following steps:
 
-1. [Installing the `w3` tool](#install)
-2. [Creating and registering your first space](#create-your-first-space)
-3. [Uploading a file or directory](#upload-files)
-4. [Viewing your file with IPFS](#view-your-file-with-ipfs)
+Installing the `w3` tool](#install)
+Creating and registering your first space](#create-your-first-space)
+Uploading a file or directory](#upload-files)
+Viewing your file with IPFS](#view-your-file-with-ipfs)
 
-## Install
+Install
 
 :::info
 You'll need [Node](https://nodejs.com) version 16 or higher, with NPM version 7 or higher to complete this guide.
@@ -30,7 +30,7 @@ npm install -g @web3-storage/w3cli
 
 Once the install is complete, you'll have a `w3` command available. Try running `w3 --help` to get an idea of what's possible.
 
-## Create your first space
+Create your first space
 
 When you upload things to web3.storage, each upload is associated with a "space," which is a unique identifier that acts as a namespace for your content.
 
@@ -64,7 +64,7 @@ w3 space register you@mail-provider.net
 
 This command will wait for you to check your email and click the confirmation link that was sent to your address. Once you confirm your email, you'll see a success message and are ready to upload.
 
-## Upload files
+Upload files
 
 Now that you've [created and registered a space](#create-space), you're ready to upload files to web3.storage!
 
@@ -80,7 +80,7 @@ If you uploaded a single file, the link will resolve to an IPFS directory listin
 
 When uploading directories, files beginning with a `.` character are ignored by default. To include hidden files instead, pass in the `-H` or `--hidden` flag.
 
-## View your file with IPFS
+View your file with IPFS
 
 When your upload completes, you should see a link to your files on the `w3s.link` IPFS gateway. Just click the link to see your files!
 
