@@ -1,9 +1,9 @@
 
-UCAN: User controlled authorization networks
+# UCAN: User controlled authorization networks
 
 The w3up platform by web3.storage is built on a technology called UCAN, a system which takes a different approach to user identity and authorization than you may be used to from building or interacting with "web 2.0" services. Read on to learn about what makes UCAN special.
 
-UCAN basics
+## UCAN basics
 
 UCAN stands for User Controlled Authorization Networks, and it's fundamentally about changing the relationship between users and service providers in a way that empowers the end-user.
 
@@ -21,7 +21,7 @@ To crib an analogy from the [UCAN spec](https://github.com/ucan-wg/spec#12-intui
 
 UCANs work more like a movie ticket or a festival pass, which grants you access based on simple possession of the ticket. There's no need to first verify your identity and compare it to an access list. Instead, the ticket itself contains everything needed to determine whether you should be allowed in, and you can give your ticket to a friend without needing to coordinate with the venue.
 
-Resources and Capabilities
+## Resources and Capabilities
 
 As we mentioned above, UCANs contain enough information for a service to make authorization decisions without needing a separate access control list or centralized "authorization service" that maps user ids to permissions.
 
@@ -31,7 +31,7 @@ UCAN extends the [JSON Web Token (JWT)](https://jwt.io) standard to include a pe
 
 You can "invoke" a capability by making a request to a service and including a UCAN that contains the capability name and a URI that identifies the resource you're acting upon. The service will then inspect the UCAN and determine if the capabilities you're presenting are sufficient to fulfil the request.
 
-Proofs
+## Proofs
 
 When you make a request with a UCAN token, you generate the token on the client side and encode the capabilities and resources that you should have access to in the token. But how does the service know that you're actually supposed to have those capabilities? This is where proofs come into the picture.
 
@@ -39,7 +39,7 @@ Each UCAN token contains a "proof chain" that shows how your capabilities were i
 
 The simplest proof chain just has a single entry, a UCAN issued by the service or "owner" of the resource that you're trying to access. When you make a request, you embed this proof token into your "request token," and the service will compare the capabilities you're claiming in your request token to the ones granted by the proof token. Because the proof token is signed with the resource owner's private key, the service can easily validate that the proof is correct and hasn't been tampered with to grant unauthorized capabilities.
 
-Delegation
+## Delegation
 
 Above, we described a "proof chain" with a single proof - a UCAN issued by the service which grants some capabilities to a user. This is simple to reason about, but does not illustrate the power of proof chains. After all, one link is not much of a chain!
 
@@ -53,8 +53,10 @@ Delegated UCANs have a proof chain with multiple "links" in the form of UCAN tok
 
 Delegation is at the heart of what makes UCAN special! To learn more about delegation in the context of the w3up APIs, see our [delegation overview](./delegation.md).
 
-Diving deeper
+## Diving deeper
 
 Hopefully this post has helped you understand UCAN at a high level. Don't worry if there are things you still don't understand! UCAN represents a fundamentally different model for authorization that what we've grown accustomed to in a "web 2" world, but we believe that the power and flexibility it offers is worth the learning curve.
 
 If you really want to dive into UCANs, the [UCAN spec](https://github.com/ucan-wg/spec) goes into detail about how everything works. You can also take a look at [ucanto](https://github.com/web3-storage/ucanto), our UCAN-based framework for building UCAN services and interacting with them over the wire. You won't need to use `ucanto` directly in order to use w3up, but it's a good resource if you're curious about how things work under the hood.
+
+

@@ -1,8 +1,9 @@
 // @ts-check
 // Note: type annotations allow type checking and IDEs autocompletion
 
-const lightCodeTheme = require('prism-react-renderer/themes/github')
-const darkCodeTheme = require('prism-react-renderer/themes/dracula')
+const path = require('path')
+const lightCodeTheme = require('prism-react-renderer/themes/github');
+const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
@@ -19,7 +20,7 @@ const config = {
   // to replace "en" with "zh-Hans".
   i18n: {
     defaultLocale: 'en',
-    locales: ['en']
+    locales: ['en'],
   },
 
   presets: [
@@ -33,14 +34,15 @@ const config = {
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl:
-            'https://github.com/web3-storage/w3up-docs/tree/main'
+            'https://github.com/web3-storage/w3up-docs/tree/main',
         },
         theme: {
-          customCss: require.resolve('./src/css/custom.css')
-        }
-      })
-    ]
+          customCss: require.resolve('./src/css/custom.css'),
+        },
+      }),
+    ],
   ],
+
 
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
@@ -49,33 +51,33 @@ const config = {
         title: 'Web3.Storage Documentation',
         logo: {
           alt: 'Web3.Storage Logo',
-          src: 'img/logo.svg'
+          src: 'img/logo.svg',
         },
         items: [
           {
             type: 'doc',
             docId: 'intro',
             position: 'left',
-            label: 'Intro'
+            label: 'Intro',
           },
           {
             type: 'doc',
             docId: 'getting-started/index',
             position: 'left',
-            label: 'Getting Started'
+            label: 'Getting Started',
           },
           {
             type: 'doc',
             docId: 'api/index',
             position: 'left',
-            label: 'API'
+            label: 'API',
           },
           {
             href: 'https://github.com/web3-storage/web3.storage',
             label: 'GitHub',
-            position: 'right'
-          }
-        ]
+            position: 'right',
+          },
+        ],
       },
       footer: {
         style: 'dark',
@@ -85,52 +87,52 @@ const config = {
             items: [
               {
                 label: 'Introduction',
-                to: '/'
+                to: '/',
               },
               {
                 label: 'Getting Started',
-                to: '/getting-started'
+                to: '/getting-started',
               },
               {
                 label: 'API',
-                to: '/api/'
+                to: '/api/',
               }
-            ]
+            ],
           },
           {
             title: 'Community',
             items: [
               {
                 label: 'Stack Overflow',
-                href: 'https://stackoverflow.com/questions/tagged/web3storage'
+                href: 'https://stackoverflow.com/questions/tagged/web3storage',
               },
               {
                 label: 'Discord',
-                href: 'https://discord.gg/4zEkFVqwms'
+                href: 'https://discord.gg/4zEkFVqwms',
               },
               {
                 label: 'Slack',
-                href: 'https://filecoin.io/slack'
-              }
-            ]
+                href: 'https://filecoin.io/slack',
+              },
+            ],
           },
           {
             title: 'More',
             items: [
               {
                 label: 'GitHub',
-                href: 'https://github.com/web3-storage/web3.storage'
-              }
-            ]
-          }
+                href: 'https://github.com/web3-storage/web3.storage',
+              },
+            ],
+          },
         ],
-        copyright: `Copyright © ${new Date().getFullYear()} Protocol Labs. Built with Docusaurus.`
+        copyright: `Copyright © ${new Date().getFullYear()} Protocol Labs. Built with Docusaurus.`,
       },
       prism: {
         theme: lightCodeTheme,
-        darkTheme: darkCodeTheme
-      }
-    })
-}
+        darkTheme: darkCodeTheme,
+      },
+    }),
+};
 
-module.exports = config
+module.exports = config;

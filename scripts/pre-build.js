@@ -14,10 +14,10 @@ const http = require('isomorphic-git/http/node')
 const DOCS_REPO_ROOT = path.resolve(__dirname, '..')
 const WORKDIR = path.join(DOCS_REPO_ROOT, '.prebuild')
 
-/**
+/** 
  * @typedef {object} Postprocessing
  * @property {string} [renameIndexModule] if present, rename modules/index.md to the field value, to avoid docusaurus treating it as a directory index page
- *
+ * 
  * @typedef {object} RepoInfo
  * @property {string} url repo url to clone
  * @property {string} ref branch / tag to checkout
@@ -25,18 +25,18 @@ const WORKDIR = path.join(DOCS_REPO_ROOT, '.prebuild')
  * @property {string} docsOutput path relative to cloned repo containing markdown output
  * @property {string} siteDestination path relative to _this_ repo where we should put the generated docs
  * @property {Postprocessing} [postprocess] optional post-processing to apply to generated docs
- *
+ * 
  * @type {Record<string, RepoInfo>}
  */
 const REPOS = {
-  'w3up-client': {
+    'w3up-client': {
     url: 'https://github.com/web3-storage/w3up-client',
     ref: 'docs/generate-docusaurus-markdown',
     buildCommands: ['npm install', 'npm run docs:markdown'],
     docsOutput: 'docs/markdown',
     siteDestination: 'docs/api/w3up-client',
     postprocess: {
-      renameIndexModule: 'package.md'
+      renameIndexModule: 'package.md',
     }
   },
   w3protocol: {
@@ -44,15 +44,15 @@ const REPOS = {
     ref: 'main',
     buildCommands: ['pnpm install', 'pnpm run docs:markdown'],
     docsOutput: 'docs/markdown',
-    siteDestination: 'docs/api/w3protocol'
-  }
+    siteDestination: 'docs/api/w3protocol',
+  },
 }
 
 /**
- * @param {RepoInfo} repo
+ * @param {RepoInfo} repo 
  * @param {string} dest
  */
-async function cloneRepo (repo, dest) {
+async function cloneRepo(repo, dest) {
   console.log(`cloning ${repo.url} @ ${repo.ref} to ${dest}`)
   await git.clone({
     fs,
@@ -66,7 +66,7 @@ async function cloneRepo (repo, dest) {
   console.log(`clone of ${repo.url} complete`)
 }
 
-async function generateDocs (repo, checkoutDir) {
+async function generateDocs(repo, checkoutDir) {
   const pwd = process.cwd()
 
   for (const cmd of repo.buildCommands) {
@@ -86,7 +86,7 @@ async function generateDocs (repo, checkoutDir) {
   await postprocessDocsOutput(repo, checkoutDir)
 }
 
-async function postprocessDocsOutput (repo, checkoutDir) {
+async function postprocessDocsOutput(repo, checkoutDir) {
   if (!repo.postprocess) {
     return
   }
@@ -100,7 +100,7 @@ async function postprocessDocsOutput (repo, checkoutDir) {
   }
 }
 
-async function copyDocsToSiteDestination (repo, checkoutDir) {
+async function copyDocsToSiteDestination(repo, checkoutDir) {
   const src = path.join(checkoutDir, repo.docsOutput)
   const dest = path.join(DOCS_REPO_ROOT, repo.siteDestination)
 
@@ -119,14 +119,14 @@ async function copyDocsToSiteDestination (repo, checkoutDir) {
       const ignored = await git.isIgnored({
         fs,
         dir: DOCS_REPO_ROOT,
-        filepath: destRelative
+        filepath: destRelative,
       })
       return ignored
     }
   })
 }
 
-async function main () {
+async function main() {
   const clean = process.argv.some(arg => arg === '--clean')
 
   await mkdirp(WORKDIR)
@@ -151,5 +151,6 @@ async function main () {
     await copyDocsToSiteDestination(repo, dir)
   }
 }
+
 
 main()
