@@ -8,7 +8,6 @@ const fs = require('node:fs')
 const { promisify } = require('node:util')
 const exec = promisify(require('node:child_process').exec)
 const { mkdirp } = require('mkdirp')
-const copy = require('recursive-copy')
 const git = require('isomorphic-git')
 const http = require('isomorphic-git/http/node')
 
@@ -48,9 +47,6 @@ const REPOS = {
     siteDestination: 'docs/api/w3protocol',
   },
 }
-
-// don't overwrite these files if they exist in the destination.
-const NO_OVERWRITE = ['index.md', '_category_.yml']
 
 /**
  * @param {RepoInfo} repo 
@@ -108,14 +104,24 @@ async function copyDocsToSiteDestination(repo, checkoutDir) {
   const src = path.join(checkoutDir, repo.docsOutput)
   const dest = path.join(DOCS_REPO_ROOT, repo.siteDestination)
 
-  await copy(src, dest, {
-    overwrite: true,
-    filter: (filePath) => {
-      const destPath = path.join(dest, filePath)
-      if (NO_OVERWRITE.includes(filePath) && fs.existsSync(destPath)) {
-        return false
+  await fs.promises.cp(src, dest, {
+    recursive: true,
+    force: true,
+    filter: async (filePath, destPath) => {
+      // always copy directories over
+      const stats = await fs.promises.stat(filePath)
+      if (stats.isDirectory()) {
+        return true
       }
-      return true
+
+      // if the destination file is _not_ ignored by git, don't overwrite it
+      const destRelative = path.relative(DOCS_REPO_ROOT, destPath)
+      const ignored = await git.isIgnored({
+        fs,
+        dir: DOCS_REPO_ROOT,
+        filepath: destRelative,
+      })
+      return ignored
     }
   })
 }
