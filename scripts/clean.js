@@ -14,7 +14,8 @@ const { promisify } = require('node:util')
 const fs = require('node:fs/promises')
 const exec = promisify(require('node:child_process').exec)
 
-async function getIgnoredPaths () {
+
+async function getIgnoredPaths() {
   const { stdout } = await exec('git status -s --ignored')
   const paths = stdout.split(/\r?\n/)
     .filter(s => s.startsWith('!! '))
@@ -22,7 +23,8 @@ async function getIgnoredPaths () {
   return paths
 }
 
-async function main () {
+
+async function main() {
   const repoRoot = path.resolve(__dirname, '..')
   process.chdir(repoRoot)
 
