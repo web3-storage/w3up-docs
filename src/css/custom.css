@@ -4,6 +4,7 @@
  * work well for content-centric websites.
  */
 
+
  .docs-wrapper {
   background-image: url('/img/corkscrewBlurredTransparent.png');
   background-repeat: repeat;
@@ -27,7 +28,19 @@
 }
 
 .docs-wrapper main a:hover {
-  color: #d726d7;
+  color: var(--site-color-link-hover);
+}
+
+
+.docs-wrapper main .glossary-term-link {
+  color: var(--ifm-color-content);
+  border-bottom: 0.125rem dotted var(--ifm-color-content-secondary);
+}
+
+.docs-wrapper main .glossary-term-link:hover {
+  color: var(--ifm-color-primary-light);
+  text-decoration: none;
+  border-bottom: 0.125rem solid var(--ifm-color-primary-light);
 }
         
 /* You can override the default Infima variables here. */
@@ -39,6 +52,8 @@
   --ifm-color-primary-light: #5252d5;
   --ifm-color-primary-lighter: #5c5cd8;
   --ifm-color-primary-lightest: #7d7de0;
+
+  --site-color-link-hover: #d726d7;
 }
 
 
@@ -52,4 +67,6 @@
   --ifm-color-primary-lighter: #32d8b4;
   --ifm-color-primary-lightest: #4fddbf;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+
+  --site-color-link-hover: #e74510;
 }

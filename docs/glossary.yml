@@ -1,0 +1,78 @@
+
+- id: agent
+  name: Agent
+  definition: A software component that manages signing keys and delegations needed to invoke w3up APIs.
+  details: |
+    Agents are used to invoke capabilities provided by the w3up service layer, using the [ucanto](https://github.com/web3-storage/ucanto) RPC framework. 
+    
+    Agents are created locally on an end-user's device, and users are encouraged to create new agents for each device (or browser) that they want to use, rather than sharing agent keys between devices.
+
+- id: audience
+  name: Audience (UCAN)
+  definition: The intended recipient of a UCAN token, identified by DID
+  details: |
+    Each UCAN token is "addressed to" a specific principal, known as the audience.
+    
+    When invoking a capability, the service provider is the audience of the invocation.
+   
+    When delegating permissions, the audience is the party receiving the delegation.
+
+- id: bitswap
+  definition: A peer-to-peer protocol used by IPFS and Filecoin to distribute blocks of data throughout the network.
+  details: |
+    While the w3up APIs do not use Bitswap directly, once data is stored with web3.storage it is made available via Bitswap to the larger IPFS network.
+
+- id: block
+  definition: A chunk of binary data that can be identified by CID.
+  details: |
+    Data stored with web3.storage is encoded into blocks, with large files consisting of several blocks linked together.
+
+    Blocks can be uniquely identified by <Term id="cid">CID (Content Identifier)</Term>, and are often bundled into Content Archives (CARs) for transport and storage.
+
+- id: car
+  name: CAR (Content Archive)
+  definition: A collection of blocks, packaged for storage and transport.
+  details: |
+    CARs are like a [tar file](https://en.wikipedia.org/wiki/Tar_(computing)) for content-addressed data. 
+    
+    Used extensively by w3up protocols, although most users shoudn't be exposed to them directly for the most common operations.
+
+- id: cid
+  name: CID (Content Identifier)
+  definition: A Content Identifier that uniquely and verifiably identifies a block of data.
+  details: |
+    A CID consists of a cryptographic hash of the data it identifies, as well as a few bytes of metadata indicating what format the content is expected to be in. 
+    
+    See [the IPFS docs](https://docs.ipfs.tech/concepts/content-addressing/) for more details.
+
+- id: dag
+  name: DAG
+  definition: A Directed Acyclic Graph data structure.
+  details: |
+    A Directed Acyclic Graph (DAG) is a data structure that represents a collection of linked objects ("nodes"), 
+    where the links between nodes ("edges") have certain properties. 
+    For example, you can't have "cycles" or loops in the graph, where following a set of edges brings you back to the node you started from.
+
+    IPFS encodes files and directories into DAGs comprised of <Term id="block">blocks</Term> of data,
+    where each block can optionally link to other blocks using its <Term id="cid">CID</Term>.
+
+    Most DAGs will have a single "root" node which represents the "top" of the graph. 
+    By starting at the root node and traversing the links, you can find all the blocks that make up the DAG.
+
+- id: data-cid
+  name: Data CID
+  definition: A CID that resolves to some user-provided data item.
+  details: |
+    Used in preference to just <Term id="cid">"CID"</Term> in contexts where multiple types of CID are in play,
+    e.g. when talking about <Term id="upload">upload</Term>, which link a data CID to one or more <Term id="car">CAR</Term> CIDs.
+
+- id: issuer
+  name: Issuer (UCAN)
+  definition: The creator and signer of a UCAN token, identified by DID.
+  details: |
+    Each UCAN token must be signed by the private key belonging to the issuer.
+   
+    When invoking a capability, the issuer is the agent executing the invocation.
+   
+    When delegating permissions, the issuer is the agent who currently possesses 
+    the given permissions and is delegating them to another agent (the audience).
