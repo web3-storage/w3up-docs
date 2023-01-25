@@ -67,6 +67,12 @@ const config = {
             label: 'Getting Started',
           },
           {
+            type: 'doc',
+            docId: 'api/index',
+            position: 'left',
+            label: 'API',
+          },
+          {
             href: 'https://github.com/web3-storage/web3.storage',
             label: 'GitHub',
             position: 'right',
@@ -86,6 +92,10 @@ const config = {
               {
                 label: 'Getting Started',
                 to: '/getting-started',
+              },
+              {
+                label: 'API',
+                to: '/api/',
               }
             ],
           },
