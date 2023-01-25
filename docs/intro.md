@@ -14,9 +14,9 @@ This site contains documentation for w3up, our next-generation storage API based
 
 :::caution
 
-> ### ⚠️❗ The w3up APIs are currently beta preview features
+> ### The w3up APIs are currently beta preview features
 > Please read the beta [Terms of Service](https://purrfect-tracker-45c.notion.site/w3up-beta-Terms-of-Service-39cb5c13439849beae327a2efec9164a) for more details.
 >
-> Open an issue on the repo or reach out to the #web3-storage channel on [IPFS Discord](https://docs.ipfs.tech/community/chat/#discord) if you have any 
+> [Open an issue](https://github.com/web3-storage/web3.storage/issues/new) on the web3.storage repo or reach out to the #web3-storage channel on [IPFS Discord](https://docs.ipfs.tech/community/chat/#discord) if you have any 
 questions!
 :::
