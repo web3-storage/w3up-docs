@@ -9,7 +9,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 const config = {
   title: 'Web3.Storage Documentation',
   tagline: 'The simple file storage service for IPFS and Filecoin',
-  url: 'https://docs.web3.storage',
+  url: 'https://docs-beta.web3.storage',
   baseUrl: '/',
   onBrokenLinks: 'warn',
   onBrokenMarkdownLinks: 'warn',
@@ -58,7 +58,13 @@ const config = {
             type: 'doc',
             docId: 'intro',
             position: 'left',
-            label: 'Guides',
+            label: 'Intro',
+          },
+          {
+            type: 'doc',
+            docId: 'getting-started/index',
+            position: 'left',
+            label: 'Getting Started',
           },
           {
             href: 'https://github.com/web3-storage/web3.storage',
