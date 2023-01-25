@@ -2,7 +2,7 @@
 title: Getting Started
 ---
 
-**Ready to get started using web3.storage right now?** Get up and running in minutes by following one of our quickstart guides.
+Ready to get started using web3.storage right now?** Get up and running in minutes by following one of our quickstart guides.
 
 If you're building a JavaScript or TypeScript app, see our [guide to using w3up-client](./w3up-client.md).
 
