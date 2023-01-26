@@ -38,9 +38,9 @@ Here's what your backend code might look like:
 import { create } from '@web3-storage/w3up-client'
 import { parse as parseDID } from '@ipld/dag-ucan/did'
 
-async function delegationRequestHandler(request) {
+async function delegationRequestHandler (request) {
   const userDID = await getDIDFromRequest(request)
-  
+
   // The `create` function will load your agent keys from disk,
   // falling back to creating a new agent if none can be found.
   // Here, we assume that you've previously created an agent
@@ -55,27 +55,27 @@ async function delegationRequestHandler(request) {
   // "ability" strings.
   // Here, we're passing in the abilities needed to upload to the space:
   // 'space/info', 'store/add', and 'upload/add'.
-  // 
+  //
   // With these capabilities, the user will be able to upload to the space,
   // but they won't be able to list existing uploads or perform any "management"
   // operation on the space. To give full access, use the special "top" ability
   // "*", which includes all abilities that your agent has access to.
-  // 
-  // See the capabilities spec for more about capabilities: 
-  // https://github.com/web3-storage/w3protocol/blob/main/spec/capabilities.md  
+  //
+  // See the capabilities spec for more about capabilities:
+  // https://github.com/web3-storage/w3protocol/blob/main/spec/capabilities.md
   const delegation = await client.createDelegation(userDID, ['store/add', 'upload/add'])
 
   // The delegation object is a binary "blob" that encodes the UCAN
-  // delegation into the CAR format. 
-  // Here we're just returning it from our handler and assuming that the 
-  // server-side framework will handle the details of setting the right 
+  // delegation into the CAR format.
+  // Here we're just returning it from our handler and assuming that the
+  // server-side framework will handle the details of setting the right
   // Content-Type headers, etc.
-  // Alternatively, you could encode the delegation to base64 and 
+  // Alternatively, you could encode the delegation to base64 and
   // include it in a JSON response, etc.
   return delegation
 }
 
-async function getDIDFromRequest(request) {
+async function getDIDFromRequest (request) {
   // How to extract the user's public DID from the request will
   // depend on the server-side framework you're using and your
   // service API.
