@@ -61,7 +61,7 @@
 
 - id: did
   name: DID
-  definition: A decentralized identifier. Used throughout the w3up APIs.
+  definition: A decentralized identifier that contains or links to a cryptographic public key.
   details: |
     DIDs are decentralized identifiers that don't rely on any single authority to issue and validate.
 
@@ -116,6 +116,8 @@
   name: IPLD
   definition: InterPlanetary Linked Data is a collection of data formats that can be linked together by CID.
   details: |
+    IPLD is a specification for data types that can be linked together by <Term id="cid">CID</Term> to form a <Term id="dag">DAG</Term>.
+
     <Term id="unixfs">UnixFS</Term> is an IPLD data format, but IPLD also supports
     JSON, CBOR, and other encodings for structured data that do not need the "file-like"
     metadata included in UnixFS.
@@ -156,3 +158,32 @@
     The <Term id="ucan">UCAN</Term>-based w3up APIs are implemented using the [ucanto framework](https://github.com/web3.storage/ucanto).
     
     ucanto provides the "plumbing" for type-safe UCAN-based APIs, allowing services to define capability handlers which can be invoked by authorized clients.
+
+- id: unixfs
+  name: UnixFS
+  definition: A data format used by IPFS to represent files and directories.
+  details: |
+    UnixFS is a data format used by <Term id="ipfs">IPFS</Term> to encode files and directories into a <Term id="dag">DAG</Term> structure.
+    When preparing data for IPFS, the UnixFS encoder will chunk files into <Term id="block">blocks</Term> that are linked by <Term id="cid">CID</Term>. 
+
+    UnixFS is used by IPFS on all operating systems, including Windows.
+    The name indicates that the format supports some common metadata used on Unix platforms,
+    for example, symbolic links and modification time.
+
+- id: w3up
+  name: w3up
+  definition: The name of web3.storage's UCAN-based storage platform.
+  details: |
+    When web3.storage first launched, it offered a traditional "RESTful" / "JSON over HTTP" API,
+    aimed at getting traditional web developers tapped into the potential of decentralized,
+    content addressed storage.
+
+    After learning a lot from our first iteration, we created a new API backed
+    by <Term id="elastic-ipfs">Elastic IPFS</Term> that leverages <Term id="ucan">UCANs</Term> 
+    to provide secure and flexible authorization that can integrate with traditional web apps
+    as well as fully decentralized smart contract applications.
+
+    The new APIs are provided by a collection of <Term id="ucanto">ucanto</Term> services and are
+    collectively known as "w3up" to distinguish them from our "v1" RESTful API.
+
+    You can learn more about the motivations for w3up in our [beta announcement blog post](https://blog.web3.storage/posts/w3up-beta-launch).
