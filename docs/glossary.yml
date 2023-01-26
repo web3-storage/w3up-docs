@@ -116,6 +116,8 @@
   name: IPLD
   definition: InterPlanetary Linked Data is a collection of data formats that can be linked together by CID.
   details: |
+    IPLD is a specification for data types that can be linked together by <Term id="cid">CID</Term> to form a <Term id="dag">DAG</Term>.
+
     <Term id="unixfs">UnixFS</Term> is an IPLD data format, but IPLD also supports
     JSON, CBOR, and other encodings for structured data that do not need the "file-like"
     metadata included in UnixFS.
@@ -156,3 +158,14 @@
     The <Term id="ucan">UCAN</Term>-based w3up APIs are implemented using the [ucanto framework](https://github.com/web3.storage/ucanto).
     
     ucanto provides the "plumbing" for type-safe UCAN-based APIs, allowing services to define capability handlers which can be invoked by authorized clients.
+
+- id: unixfs
+  name: UnixFS
+  definition: A data format used by IPFS to represent files and directories.
+  details: |
+    UnixFS is a data format used by <Term id="ipfs">IPFS</Term> to encode files and directories into a <Term id="dag">DAG</Term> structure.
+    When preparing data for IPFS, the UnixFS encoder will chunk files into <Term id="block">blocks</Term> that are linked by <Term id="cid">CID</Term>. 
+
+    UnixFS is used by IPFS on all operating systems, including Windows.
+    The name indicates that the format supports some common metadata used on Unix platforms,
+    for example, symbolic links and modification time.
