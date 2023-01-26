@@ -32,9 +32,9 @@ Once the install is complete, you'll have a `w3` command available. Try running 
 
 ## Create your first space
 
-When you upload things to web3.storage, each upload is associated with a "space," which is a unique identifier that acts as a namespace for your content.
+When you upload things to web3.storage, each upload is associated with a <Term id="space">"space,"</Term> which is a unique identifier that acts as a namespace for your content.
 
-Spaces are identified by [DID][concepts-did] using keys created locally on your devices. To use a space for uploads, it needs to be registered with the storage service by providing an email address.
+Spaces are identified by <Term id="did">DID</Term> using keys created locally on your devices. To use a space for uploads, it needs to be registered with the storage service by providing an email address.
 
 To create a space using the `w3` command line tool, use the `w3 space create` command. You can optionally give your space a "friendly" name, which acts like an alias for the space's DID and can make it easier to tell your spaces apart. In the example below, we'll use the name `Documents`:
 
@@ -74,7 +74,7 @@ Use the `w3 up` command to upload a file or directory:
 w3 up your-file.txt
 ```
 
-Once your upload is complete, you should see a URL that links to your file on the `w3s.link` IPFS gateway.
+Once your upload is complete, you should see a URL that links to your file on the `w3s.link` <Term id="gateway">IPFS gateway</Term>.
 
 If you uploaded a single file, the link will resolve to an IPFS directory listing, with the actual file contained in the directory. This "wrapper" directory preserves the original filename of your upload, which can help organize your content and allows people to download files using their original names. If you don't want to create the wrapper directory, you can pass in the `--no-wrap` flag when running `w3 up`.
 
@@ -82,6 +82,6 @@ When uploading directories, files beginning with a `.` character are ignored by 
 
 ## View your file with IPFS
 
-When your upload completes, you should see a link to your files on the `w3s.link` IPFS gateway. Just click the link to see your files!
+When your upload completes, you should see a link to your files on the `w3s.link` <Term id="gateway">IPFS gateway</Term>. Just click the link to see your files!
 
 [concepts-did]: ../concepts/dids.md
