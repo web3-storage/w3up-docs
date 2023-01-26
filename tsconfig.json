@@ -5,6 +5,6 @@
 
   "compilerOptions": {
     "baseUrl": ".",
-    "strictNullChecks": true,
+    "strictNullChecks": true
   }
 }

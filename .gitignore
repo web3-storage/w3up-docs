@@ -14,9 +14,11 @@ docs/api/w3up-client/*
 !docs/api/w3up-client/index.md
 !docs/api/w3up-client/_category_.yml
 
-
 docs/api/w3protocol/*
 !docs/api/w3protocol/_category_.yml
+
+# Generated glossary markdown (see scripts/glossary-page.js)
+docs/glossary.md
 
 # Misc
 .DS_Store

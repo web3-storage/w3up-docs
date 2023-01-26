@@ -42,6 +42,10 @@ const config = {
     ]
   ],
 
+  plugins: [
+    './src/glossary-plugin'
+  ],
+
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
