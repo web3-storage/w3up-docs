@@ -32,9 +32,9 @@ npm install @web3-storage/w3up-client
 To use the client, import and call the `create` function:
 
 ```js
-import { create } from '@web3-storage/w3up-client';
+import { create } from '@web3-storage/w3up-client'
 
-const client = await create();
+const client = await create()
 ```
 
 See the [client reference docs][reference-w3up-client#create] for more creation options.
@@ -48,7 +48,7 @@ Spaces are identified by [DID][concepts-did] using keys created locally on your 
 To create a space using `w3up-client`, use the [`createSpace` client method][reference-w3up-client#createSpace]:
 
 ```js
-const space = await client.createSpace('my-awesome-space');
+const space = await client.createSpace('my-awesome-space')
 ```
 
 The name parameter is optional. If provided, it will be stored in your client's local state store and can be used to provide a friendly name for user interfaces.
@@ -58,16 +58,16 @@ After creating a [`Space`][reference-w3up-client#space], you'll need to register
 First, set the space as your "current" space using the [`setCurrentSpace` method][reference-w3up-client#setcurrentspace], passing in the DID of the `space` object you created above:
 
 ```js
-await client.setCurrentSpace(space.did());
+await client.setCurrentSpace(space.did())
 ```
 
 Next, call the [`registerSpace` method][reference-w3up-client#registerspace], passing in an email address to register as the primary contact for the space:
 
 ```js
 try {
-  await client.registerSpace('zaphod@beeblebrox.galaxy');
+  await client.registerSpace('zaphod@beeblebrox.galaxy')
 } catch (err) {
-  console.error('registration failed: ', err);
+  console.error('registration failed: ', err)
 }
 ```
 
@@ -91,10 +91,10 @@ You can control the directory layout and create nested directory structures by u
 const files = [
   new File(['some-file-content'], 'readme.md'),
   new File(['import foo'], 'src/main.py'),
-  new File([someBinaryData], 'images/example.png'),
-];
+  new File([someBinaryData], 'images/example.png')
+]
 
-const directoryCid = await client.storeDirectory(files);
+const directoryCid = await client.storeDirectory(files)
 ```
 
 In the example above, `directoryCid` resolves to an IPFS directory with the following layout:

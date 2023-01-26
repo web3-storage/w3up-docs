@@ -4,17 +4,23 @@ module.exports = {
     commonjs: true,
     es2021: true
   },
-  extends: [
-    // 'plugin:mdx/recommended',
-  ],
+  extends: [],
   overrides: [
     {
       files: ['*.md', '*.mdx'],
-      extends: 'plugin:mdx/recommended',
+      extends: 'plugin:mdx/recommended'
     },
     {
-      files: ['*.js', '*.ts', '*.jsx', '*.tsx'],
-      extends: 'standard-with-typescript',
+      files: ['*.ts', '*.tsx'],
+      extends: 'standard-with-typescript'
+    },
+    {
+      files: ['*.js', '*.jsx'],
+      extends: 'standard',
+      rules: {
+        'no-unused-vars': 'off',
+        'no-undef': 'off'
+      }
     }
   ],
   parserOptions: {
@@ -24,7 +30,7 @@ module.exports = {
     extensions: ['mdx', 'md'],
     sourceType: 'module',
     ecmaFeatures: {
-      jsx: true,
+      jsx: true
     }
   },
   ignorePatterns: [
@@ -34,6 +40,6 @@ module.exports = {
   rules: {
   },
   settings: {
-    'mdx/code-blocks': true,
+    'mdx/code-blocks': true
   }
 }
