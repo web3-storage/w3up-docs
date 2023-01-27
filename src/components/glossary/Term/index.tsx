@@ -1,6 +1,5 @@
 import React from 'react'
 import { usePluginData } from '@docusaurus/useGlobalData'
-import { slug } from 'github-slugger'
 
 import 'react-tooltip/dist/react-tooltip.css'
 import { Tooltip } from 'react-tooltip'
@@ -37,7 +36,7 @@ export default function Term (props: Props): React.ReactElement {
   }
 
   const t = matching[0]
-  const glossaryAnchor = slug(t.name ?? t.id)
+  const glossaryAnchor = t.id
 
   // generate unique anchor id, in case there are multiple Term components for the same term on the page
   const anchor = `term-${id}-${Math.random()}`
