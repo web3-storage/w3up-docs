@@ -44,7 +44,7 @@ function generateMarkdown (terms, frontmatter = GLOSSARY_META) {
     const termName = name || capitalize(id)
     const detailText = details || ''
     const s = stripIndents`
-    ### ${termName}
+    ### ${termName} {#${id}}
 
     > ${definition}
 
