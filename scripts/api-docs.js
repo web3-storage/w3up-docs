@@ -31,7 +31,7 @@ const WORKDIR = path.join(DOCS_REPO_ROOT, '.prebuild')
 const REPOS = {
   'w3up-client': {
     url: 'https://github.com/web3-storage/w3up-client',
-    ref: 'docs/generate-docusaurus-markdown',
+    ref: 'main',
     buildCommands: ['npm install', 'npm run docs:markdown'],
     docsOutput: 'docs/markdown',
     siteDestination: 'docs/api/w3up-client',
