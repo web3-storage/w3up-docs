@@ -1,8 +1,6 @@
 import React from 'react'
 import { usePluginData } from '@docusaurus/useGlobalData'
-
-import 'react-tooltip/dist/react-tooltip.css'
-import { Tooltip } from 'react-tooltip'
+import Tippy from '@tippyjs/react'
 
 interface Props {
   id: string
@@ -21,7 +19,6 @@ interface PluginData {
 
 export default function Term (props: Props): React.ReactElement {
   const { id } = props
-
   const { terms } = usePluginData('w3up-glossary-plugin') as PluginData
 
   const glossaryRoute = '/glossary'
@@ -38,25 +35,20 @@ export default function Term (props: Props): React.ReactElement {
   const t = matching[0]
   const glossaryAnchor = t.id
 
-  // generate unique anchor id, in case there are multiple Term components for the same term on the page
-  const anchor = `term-${id}-${Math.random()}`
-
   if (t.definition == null) {
     console.error(`term ${id} has no "definition" field defined`)
     return <>{props.children}</>
   }
 
   return (
-    <>
+    <Tippy content={t.definition}>
       <a
-        id={anchor}
         className="glossary-term-link"
         data-tooltip-content={t.definition}
         href={`${glossaryRoute}#${glossaryAnchor}`}
         >
           {props.children}
       </a>
-      <Tooltip anchorId={anchor} />
-    </>
+    </Tippy>
   )
 }
