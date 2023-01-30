@@ -13,14 +13,14 @@ jobs:
       
       - uses: actions/setup-node@v3
         with:
-          node-version: 16.x
+          node-version: 18.x
       # setup pnpm
       - uses: pnpm/action-setup@v2.2.4
         with:
           version: 7
       # install deps    
       - name: Install dependencies
-        run: npm install
+        run: pnpm install
       # run build  
       - name: Build application
-        run: npm run build
+        run: pnpm run build
