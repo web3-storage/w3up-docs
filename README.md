@@ -6,16 +6,16 @@ This repo contains a [Docusaurus](https://docusaurus.io) project that builds the
 
 ### Installation
 
-You'll need Node v18+ to build this project.
+You'll need Node v18+ to build this project, and [`pnpm`](https://pnpm.io/installation) to install dependencies.
 
-```
-$ npm install
+```bash
+pnpm install
 ```
 
 ### Local Development
 
 ```
-$ npm run start
+pnpm run start
 ```
 
 This command starts a local development server and opens up a browser window. Most changes are reflected live without having to restart the server.
@@ -23,7 +23,7 @@ This command starts a local development server and opens up a browser window. Mo
 ### Build
 
 ```
-$ npm run build
+pnpm run build
 ```
 
 This command generates static content into the `build` directory and can be served using any static contents hosting service.
